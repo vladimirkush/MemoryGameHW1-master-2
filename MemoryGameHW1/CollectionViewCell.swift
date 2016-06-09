@@ -11,6 +11,8 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     
-    @IBOutlet weak var lblCelltext: UILabel!
+    @IBOutlet weak var FrontImageView: UIImageView!
+    
+    
     var isFaceUp=false
 }

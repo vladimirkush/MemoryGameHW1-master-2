@@ -76,24 +76,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iui-5o-i7a">
-                                                    <rect key="frame" x="3" y="0.0" width="65" height="65"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lpV-2K-lLP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="0.46822362588652483" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="Iui-5o-i7a" firstAttribute="top" secondItem="iS6-82-MLq" secondAttribute="top" id="6ey-cn-gjd"/>
-                                            <constraint firstItem="Iui-5o-i7a" firstAttribute="centerX" secondItem="iS6-82-MLq" secondAttribute="centerX" id="8FU-e4-cJE"/>
-                                            <constraint firstItem="Iui-5o-i7a" firstAttribute="leading" secondItem="iS6-82-MLq" secondAttribute="leadingMargin" constant="-5" id="9KX-7u-qYp"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="Iui-5o-i7a" secondAttribute="bottom" constant="-3" id="e5m-bX-cst"/>
-                                        </constraints>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="lblCelltext" destination="Iui-5o-i7a" id="eUJ-oD-zlY"/>
+                                            <outlet property="FrontImageView" destination="lpV-2K-lLP" id="JD5-ee-byh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -128,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="-222"/>
+            <point key="canvasLocation" x="60" y="-210"/>
         </scene>
         <!--Option View Controller-->
         <scene sceneID="w3l-vZ-pX7">

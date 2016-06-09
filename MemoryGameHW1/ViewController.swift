@@ -11,6 +11,8 @@ import UIKit
 
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    var backImage = UIImage(named: "cellBack")
+    var testImage = UIImage(named: "cell0")
     var unflippedLabel = "X"
     var charArray = ["A","A","B","B","C","C","D","D","E","E","F","F","G","G","H","H"]
     var charMatrix = [["a","b","c","d"],["x","y","z","w"],["a","b","c","d"],["x","y","z","w"]]
@@ -88,7 +90,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 let  cell=collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: i, inSection: j)) as! CollectionViewCell
                 cell.isFaceUp=false;
                 cell.hidden=false
-                cell.lblCelltext.text = unflippedLabel
+                cell.FrontImageView.image = backImage    //********//*******
             }
         }
     }
@@ -113,9 +115,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CellID", forIndexPath: indexPath) as! CollectionViewCell
         //here we setting the initial text
         if(!cell.isFaceUp){
-            cell.lblCelltext.text = unflippedLabel}
+            cell.FrontImageView.image = backImage    ///*******////*******
+        }
         else{
-            cell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]}
+            //cell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
+            cell.FrontImageView.image=testImage  ///*******////*******
+        }
         
         
         return cell
@@ -125,8 +130,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         print("Row \(indexPath.row), section: \(indexPath.section)")
         let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! CollectionViewCell
         clickCount++
-        currentCell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
-        
+        //currentCell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
+        currentCell.FrontImageView.image=testImage///*******////*******
         if(clickCount==1){
             firstCell[0]=indexPath.section
             firstCell[1]=indexPath.row
@@ -195,7 +200,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     cell.hidden=true
                 }
                 else{
-                    cell.lblCelltext.text = unflippedLabel
+                    //cell.lblCelltext.text = unflippedLabel
+                    cell.FrontImageView.image=backImage //**********//*******ß
                 }
                 
             }
