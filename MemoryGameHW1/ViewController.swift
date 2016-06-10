@@ -90,7 +90,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 let  cell=collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: i, inSection: j)) as! CollectionViewCell
                 cell.isFaceUp=false;
                 cell.hidden=false
-                cell.FrontImageView.image = backImage    //********//*******
+                cell.setImages(testImage!, back: backImage!)
+                //cell.back = UIImageView(image: backImage)
+                //cell.FrontImageView.image = backImage    //********//*******
             }
         }
     }
@@ -114,14 +116,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CellID", forIndexPath: indexPath) as! CollectionViewCell
         //here we setting the initial text
-        if(!cell.isFaceUp){
-            cell.FrontImageView.image = backImage    ///*******////*******
-        }
-        else{
-            //cell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
-            cell.FrontImageView.image=testImage  ///*******////*******
-        }
-        
+        //if(!cell.isFaceUp){
+        //    cell.FrontImageView.image = backImage    ///*******////*******
+        //}
+        //else{
+        //    //cell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
+        //    cell.FrontImageView.image=testImage  ///*******////*******
+        //}
+        cell.setImages(testImage!, back: backImage!)
         
         return cell
     }
@@ -130,20 +132,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         print("Row \(indexPath.row), section: \(indexPath.section)")
         let currentCell = collectionView.cellForItemAtIndexPath(indexPath) as! CollectionViewCell
         clickCount++
-        //currentCell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
-        currentCell.FrontImageView.image=testImage///*******////*******
+        var match = false
+        currentCell.disable()
+        currentCell.flip()
+        
+        
         if(clickCount==1){
             firstCell[0]=indexPath.section
             firstCell[1]=indexPath.row
         }
             
-        else if(clickCount==2){
+        else if(clickCount == 2 ){
             clickCount=0
             if(checkFlipedCells(charMatrix[indexPath.section][indexPath.row],cell2: charMatrix[firstCell[0]][firstCell[1]]) && !(indexPath.section == firstCell[0] &&  firstCell[1] == indexPath.row)){
-                currentCell.isFaceUp=true
                 
-                let  savedCell=collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: firstCell[1], inSection: firstCell[0])) as! CollectionViewCell
-                savedCell.isFaceUp=true
+                //we found a matching pictures
+                
+                match = true
+                
+                
+                
+                
                 
             }
             setCellsEnabled(collectionView, enabled: false)
@@ -151,7 +160,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             //wait 1 sec
             let time=dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), 1*Int64(NSEC_PER_SEC))
             dispatch_after(time, dispatch_get_main_queue()){
-                self.setFaceDownWrongCell(collectionView)
+                //self.setFaceDownWrongCell(collectionView)
+                if(match){
+                    currentCell.hidden = true
+                    let savedCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: self.firstCell[1], inSection: self.firstCell[0])) as! CollectionViewCell
+                    savedCell.hidden = true
+                    match = false
+                }else{
+                    currentCell.flip()
+                    let savedCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: self.firstCell[1], inSection: self.firstCell[0])) as! CollectionViewCell
+                    savedCell.flip()
+                }
+                
                 self.setCellsEnabled(collectionView, enabled: true)
                 
                 if self.checkGameEnded(collectionView){
@@ -201,7 +221,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 }
                 else{
                     //cell.lblCelltext.text = unflippedLabel
-                    cell.FrontImageView.image=backImage //**********//*******ß
+                    //cell.FrontImageView.image=backImage //**********//*******
+                    cell.flip()
                 }
                 
             }
