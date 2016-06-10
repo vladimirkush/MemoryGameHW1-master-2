@@ -12,8 +12,9 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var backImage = UIImage(named: "cellBack")
-    var testImage = UIImage(named: "cell0")
+    var testImage = UIImage(named: "cell7")
     var unflippedLabel = "X"
+    var imageNamePrefix = "cell"
     var charArray = ["A","A","B","B","C","C","D","D","E","E","F","F","G","G","H","H"]
     var charMatrix = [["a","b","c","d"],["x","y","z","w"],["a","b","c","d"],["x","y","z","w"]]
     var clickCount = 0
@@ -91,10 +92,30 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.isFaceUp=false;
                 cell.hidden=false
                 cell.setImages(testImage!, back: backImage!)
-                //cell.back = UIImageView(image: backImage)
-                //cell.FrontImageView.image = backImage    //********//*******
+                
             }
         }
+    }
+    
+    func ImageForLetter (letter: String)->UIImage{
+        var filename = imageNamePrefix
+        
+        switch letter{
+            case "A":   filename += "0"
+            case "B":   filename += "1"
+            case "C":   filename += "2"
+            case "D":   filename += "3"
+            case "E":   filename += "4"
+            case "F":   filename += "5"
+            case "G":   filename += "6"
+            case "H":   filename += "7"
+            
+        default: print ("illegal parameter")
+            
+        }
+        print("filename \(filename)")
+        let image = UIImage(named: filename)
+        return image!
     }
     
    
@@ -123,7 +144,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //    //cell.lblCelltext.text=charMatrix[indexPath.section][indexPath.row]
         //    cell.FrontImageView.image=testImage  ///*******////*******
         //}
-        cell.setImages(testImage!, back: backImage!)
+        cell.setImages(ImageForLetter(charMatrix[indexPath.section][indexPath.row]), back: backImage!)
         
         return cell
     }
